@@ -1,0 +1,10 @@
+@(formCupom: Form[CupomDesconto])
+@import helper._
+
+@main("Cadastrar Cupom"){
+	@helper.form(routes.Application.novoCupom) {
+		@inputText(formCupom("nomeDoCliente"), '_label -> "Nome do cliente")
+		@inputText(formCupom("valor"), '_label -> "Valor")
+		<input type="submit" value="Criar">
+	}
+}

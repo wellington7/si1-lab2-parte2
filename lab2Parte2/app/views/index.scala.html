@@ -1,7 +1,63 @@
-@(message: String)
+@(metas: List[Meta], metaForm: Form[Meta])
 
-@main("Welcome to Play") {
-
-    @play20.welcome(message, style = "Java")
-
-}
+<html lang=" ">
+	<head>
+		<title>Sistema de Metas</title>
+		<meta charset="UTF-8">
+		<meta name=description content="Sistema simples de controle de metas">
+		<meta name=viewport content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	</head>
+	
+	<body>
+	<div class="content">
+		<div class="col-sm-5">
+			<h2 class="text-center">@metas.size() meta(s)</h2>
+				<div class="table-responsive">
+					<thead>
+						<tr>
+							<th>Meta</th>
+							<th>Descrição</th>
+							<th>Prioridade</th>
+						</tr>
+					</thead>
+					<tbody>
+						@for(meta <- metas) {
+							<tr>
+								<td>@meta.getNome()</td>
+								<td>@meta.getDescricao()</td>
+								<td>
+									<form action="@routes.Application.apagaMeta(meta.getId())" method="post">
+										<input type="submit" class="btn btn-danger" value="Apagar">
+									</form>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</div>
+		</div>
+	</div>
+	
+	<div class="col-sm-4">
+		<h2>Adiciona uma meta</h2>
+		<form action="@routes.Application.novaMeta()" method="post">
+			<label for="meta">Meta: </label>
+			<input type="text" name="meta" id="inputMeta" class="form-control"required="required">
+			<input type="submit" class="btn btn-primary" value="Adicionar">
+		</form>
+		<h2>Adiciona uma descrição a meta</h2>
+		<form action="/metas/addDescricao" method="get">
+			<select name="meta" id="inputMeta" class="form-control">
+				<option value="" disabled>--- Escolha uma ---</option>
+				@for(meta <-metas){
+					<option value="@meta.getId()">@meta.getNome()</option>
+				}
+			</select>
+			<label for="nome">Descrição: </label>
+			<input type="text" name="descricao" id="inputDescricao" class="form-control"required="required">
+			<input type="submit" class="btn btn-primary" value="ok">
+		</form>
+	</div>
+	</body>
+</html>

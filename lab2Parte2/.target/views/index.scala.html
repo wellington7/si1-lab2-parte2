@@ -1,0 +1,25 @@
+@(cupons: List[CupomDesconto])
+
+@main("Lista de Cupons") {
+	@if(cupons.isEmpty){
+		<h3>Não há cupons cadastrados</h3>
+	} else {
+		<h3>Cupons Cadastrados:</h3>
+		<table>
+			<tr>
+				<th>id</th>
+				<th>cliente</th>
+				<th>valor</th>
+			</tr>
+			@for(cupom <- cupons){
+				<tr>
+					<td>@cupom.getId</td>
+					<td>@cupom.getNomeDoCliente</td>
+					<td>R$ @cupom.getValor</td>
+				</tr>
+			}
+		</table>
+	}
+	<hr>
+	<a href="@routes.Application.formularioNovoCupom">Novo cupom</a>
+}
