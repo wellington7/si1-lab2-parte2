@@ -32,8 +32,8 @@ public class Application extends Controller {
 		if (filledForm.hasErrors()){
 			return badRequest(views.html.index.render(result, filledForm));
 		} else {
-			getDao.persist(filledForm.get());
-			getDao.flush();
+			getDao().persist(filledForm.get());
+			getDao().flush();
 			return redirect(routes.Application.metas());
 		}
 	}
@@ -41,7 +41,7 @@ public class Application extends Controller {
 	@Transactional
 	public static Result addDescricao(Long id, String descricao){
 		Meta metaDaListagem = getDao().findByEntityId(Meta.class, id);
-		metaDaListagem.setDescricao().add(descricao);
+		metaDaListagem.setDescricao(descricao);
 		getDao().merge(metaDaListagem);
 		getDao().flush();
 		List<Meta> result = getDao().findAllByClassName("Meta");
@@ -50,7 +50,7 @@ public class Application extends Controller {
 	
 	@Transactional
 	public static Result apagaMeta(Long id){
-		getDao().removeById(Livro.class, id);
+		getDao().removeById(Meta.class, id);
 		getDao().flush();
 		return redirect(routes.Application.metas());
 	}

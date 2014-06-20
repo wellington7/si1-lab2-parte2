@@ -26,29 +26,29 @@ public class Meta{
 	@Column
 	private String descricao;
 
-	public class Meta(){}
+	public Meta(){}
 
-	public getId(){
+	public Long getId(){
 		return id;
 	}
 	
-	public setId(Long id){
+	public void setId(Long id){
 		this.id = id;
 	}
 	
-	public getMeta(){
+	public String getMeta(){
 		return meta;
 	}
 	
-	public setMeta(String meta){
+	public void setMeta(String meta){
 		this.meta = meta;
 	}
 	
-	public getDescricao(){
+	public String getDescricao(){
 		return descricao;
 	}
 	
-	public setDescricao(String descricao){
+	public void setDescricao(String descricao){
 		this.descricao = descricao;
 	}
 
